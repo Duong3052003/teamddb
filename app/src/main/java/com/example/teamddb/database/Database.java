@@ -1,4 +1,4 @@
-package com.example.teamddb;
+package com.example.teamddb.database;
 
 import android.content.ContentValues;
 import android.content.Context;
