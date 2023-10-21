@@ -1,25 +1,20 @@
 package com.example.teamddb.controller;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AlertDialogLayout;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.teamddb.Database;
+import com.example.teamddb.database.Database;
 import com.example.teamddb.R;
 import com.example.teamddb.adap.adap_acc;
 import com.example.teamddb.model.acc;
@@ -59,6 +54,7 @@ import java.util.List;
         recyclerview.setItemAnimator(new DefaultItemAnimator());
         recyclerview.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerview.setAdapter(aa);
+
 
         recyclerview.addOnItemTouchListener(new RecyclerTouchListener(this, recyclerview, new RecyclerTouchListener.ClickListener() {
             @Override
@@ -120,15 +116,26 @@ import java.util.List;
         alertDialog.show();
         alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(view -> {
             String strTaiKhoan = editTaiKhoan.getText().toString(),
-                    strMatKhau = editMatKhau.getText().toString();
+                    strMatKhau = editMatKhau.getText().toString(),
+                    strEmail = editEmail.getText().toString(),
+                    strHoTen = editHoTen.getText().toString();
             if (strTaiKhoan.matches("")) {
                 editTaiKhoan.requestFocus();
-//                editTaiKhoan.setError(getString(R.string.TaiKhoanNull));
+                editTaiKhoan.setError("Chưa nhập tài khoản");
             } else if (strMatKhau.matches("")) {
                 editMatKhau.requestFocus();
-//                editMatKhau.setError(getString(R.string.MatKhauNull));
-            } else if (checkTaiKhoanDuplicate(a, strTaiKhoan, ac)) {
-//                editTaiKhoan.setError(getString(R.string.TaiKhoanExists));
+                editMatKhau.setError("Chưa nhập mật khẩu");
+
+            }
+            if (strEmail.matches("")) {
+                editEmail.requestFocus();
+                editEmail.setError("Chưa Email");
+            } else if (strHoTen.matches("")) {
+                editHoTen.requestFocus();
+                editHoTen.setError("Chưa nhập họ tên");
+            }
+            else if (checkTaiKhoanDuplicate(a, strTaiKhoan, ac)) {
+                editTaiKhoan.setError("Đã tồn tại tài khoản");
                 editTaiKhoan.requestFocus();
             } else if (ac == null) {
                 create(editTaiKhoan.getText().toString(), editMatKhau.getText().toString(),
