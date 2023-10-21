@@ -1,7 +1,7 @@
 package com.example.teamddb.model;
 
 public class acc {
-    String AccName,Password,Name,Email,Admin;
+    String AccName,Password,Name,Email;
     long Id;
 
     public String getAccName() {
@@ -40,13 +40,6 @@ public class acc {
         return Email;
     }
 
-    public String getAdmin() {
-        return Admin;
-    }
-
-    public void setAdmin(String admin) {
-        Admin = admin;
-    }
 
     public void setEmail(String email) {
         Email = email;

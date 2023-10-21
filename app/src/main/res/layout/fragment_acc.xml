@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <EditText
         android:id="@+id/search"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </EditText>
+        android:layout_height="wrap_content"
+        android:layout_below="@id/thongtin"
+        android:hint="Tìm kiếm..." />
+
+    <TextView
+        android:id="@+id/thongtin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Thông tin tài khoản"
+        android:textSize="30dp"
+
+        />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/them"
@@ -18,8 +30,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="98dp"
-        android:src="@drawable/baseline_add_24"
-        ></com.google.android.material.floatingactionbutton.FloatingActionButton>
+        android:src="@drawable/baseline_add_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/thoat"
@@ -29,13 +40,13 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="24dp"
         android:layout_marginBottom="98dp"
-        android:src="@drawable/baseline_exit_to_app_24"
-        ></com.google.android.material.floatingactionbutton.FloatingActionButton>
+        android:src="@drawable/baseline_exit_to_app_24" />
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/linearLayout"
-        android:layout_below="@+id/search"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/search">
 
         <TextView
             android:id="@+id/textView"
@@ -72,7 +83,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="1dp"
-            android:layout_marginRight="1dp"
             android:gravity="center"
             android:text="Email"
             app:layout_constraintBaseline_toBaselineOf="@+id/textView3"
@@ -89,19 +99,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView4" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rc"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/linearLayout"
-        android:layout_marginTop="0dp"></androidx.recyclerview.widget.RecyclerView>
+        android:layout_marginTop="0dp" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:menu="@menu/bottomnav"
-        android:id="@+id/bottom"
         android:layout_alignParentBottom="true"
-        ></com.google.android.material.bottomnavigation.BottomNavigationView>
+        app:menu="@menu/bottomnav" />
 
 </RelativeLayout>
