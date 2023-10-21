@@ -3,21 +3,12 @@ package com.example.teamddb;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
-import android.os.Handler;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.teamddb.database.Database;
-import com.example.teamddb.model.acc;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 public class Register extends AppCompatActivity {
 

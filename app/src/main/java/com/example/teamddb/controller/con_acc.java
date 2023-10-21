@@ -1,6 +1,5 @@
 package com.example.teamddb.controller;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -19,10 +18,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.teamddb.Login;
-import com.example.teamddb.Place;
-import com.example.teamddb.database.Database;
 import com.example.teamddb.R;
 import com.example.teamddb.adap.adap_acc;
+import com.example.teamddb.database.Database;
 import com.example.teamddb.model.acc;
 import com.example.teamddb.ultils.RecyclerTouchListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

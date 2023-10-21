@@ -1,15 +1,11 @@
 package com.example.teamddb.database;
-
-
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import com.example.teamddb.CartItem;
-import com.example.teamddb.Place;
+import com.example.teamddb.model.CartItem;
+import com.example.teamddb.model.Place;
 
 import java.util.ArrayList;
 

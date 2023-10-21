@@ -12,7 +12,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.teamddb.controller.con_acc;
-import com.example.teamddb.database.Database;
 
 public class Login extends AppCompatActivity {
 

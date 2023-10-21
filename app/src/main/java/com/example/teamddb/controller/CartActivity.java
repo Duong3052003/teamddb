@@ -12,10 +12,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.teamddb.CartItem;
 import com.example.teamddb.R;
 import com.example.teamddb.adap.CartAdapter;
 import com.example.teamddb.database.DatabaseHelper;
+import com.example.teamddb.model.CartItem;
 
 import java.util.ArrayList;
 
@@ -106,5 +106,6 @@ public class CartActivity extends AppCompatActivity {
 
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+
     }
 }
