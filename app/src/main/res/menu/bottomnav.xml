@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/action_home"
+        android:title="Trang chủ"
+        android:icon="@drawable/home_icon"/>
+    <item android:id="@+id/action_filter"
+        android:title="Lọc"
+        android:icon="@drawable/filter_icon"/>
+    <item android:id="@+id/action_history"
+        android:title="Lịch sử"
+        android:icon="@drawable/history"/>
+    <item android:id="@+id/action_account"
+        android:title="Tài khoản"
+        android:icon="@drawable/account_icon"/>
+</menu>
