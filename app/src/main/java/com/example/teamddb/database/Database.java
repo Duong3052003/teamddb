@@ -21,7 +21,7 @@ public class Database extends SQLiteOpenHelper {
     private static final String COLUMN_PASSWORD = "Password";
     private static final String COLUMN_EMAIL = "Email";
     private static final String COLUMN_NAME = "Name";
-    private static final String COLUMN_ADMIN = "Admin";
+
 
     public Database(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

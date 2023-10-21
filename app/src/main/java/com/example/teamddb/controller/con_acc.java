@@ -30,6 +30,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class con_acc extends AppCompatActivity {
 
@@ -38,7 +39,9 @@ public class con_acc extends AppCompatActivity {
     RecyclerView recyclerview;
     EditText ed;
     adap_acc aa;
-    FloatingActionButton them,thoat;
+    FloatingActionButton them, thoat;
+
+    String username;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,6 +56,9 @@ public class con_acc extends AppCompatActivity {
         them.setOnClickListener(view -> showDialog(null, -1));
         getData();
         navigate();
+
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
         ed.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -66,14 +72,14 @@ public class con_acc extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                aa = new adap_acc(con_acc.this, search(ed.getText().toString(),a));
+                aa = new adap_acc(con_acc.this, search(ed.getText().toString(), a));
                 recyclerview.setAdapter(aa);
             }
         });
         thoat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(con_acc.this, Login.class);
+                Intent intent = new Intent(con_acc.this, Login.class);
                 startActivity(intent);
                 finish();
             }
@@ -135,12 +141,12 @@ public class con_acc extends AppCompatActivity {
                         .setTitle("Xác nhận xoá")
                         .setMessage("Bạn có xác nhận muốn xoá tài khoản " + ac.getAccName() + " ?")
                         .setPositiveButton("Có", (d, which) -> {
-//                            if (ac.getAdmin().matches("1")) {
-//                                Toast.makeText(this, "Không thể xoá tài khoản đang đăng nhập", Toast.LENGTH_SHORT).show();
-//                            } else {
-                            delete(position, ac.getId());
-                            Toast.makeText(this, "Đã xoá tài khoản " + ac.getAccName(), Toast.LENGTH_SHORT).show();
-//                            }
+                            if (Objects.equals(ac.getAccName(), username)) {
+                                Toast.makeText(this, "Không thể xoá tài khoản đang đăng nhập", Toast.LENGTH_SHORT).show();
+                            } else {
+                                delete(position, ac.getId());
+                                Toast.makeText(this, "Đã xoá tài khoản " + ac.getAccName(), Toast.LENGTH_SHORT).show();
+                            }
                         })
                         .setNegativeButton("Không", null)
                         .setNeutralButton("Huỷ", null)
@@ -211,7 +217,6 @@ public class con_acc extends AppCompatActivity {
     }
 
 
-
     private void update(int position, long id, String accname, String pass, String email, String name) {
         db.update(id, accname, pass, email, name);
         acc ac = new acc();
@@ -229,6 +234,7 @@ public class con_acc extends AppCompatActivity {
         a.remove(position);
         aa.notifyItemRemoved(position);
     }
+
     private List<acc> search(String strSearch, List<acc> a) {
         strSearch = strSearch.toLowerCase();
         if (strSearch.matches("")) {
@@ -246,6 +252,7 @@ public class con_acc extends AppCompatActivity {
             return listResult;
         }
     }
+
     private void navigate() {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom);
         bottomNavigationView.setSelectedItemId(R.id.acc);

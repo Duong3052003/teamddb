@@ -44,6 +44,7 @@ public class Login extends AppCompatActivity {
             if (isValidLogin(username, password)) {
                 // Đăng nhập thành công, chuyển đến hoạt động chính hoặc trang chính của ứng dụng
                 Intent intent = new Intent(Login.this, con_acc.class);
+                intent.putExtra("username",username);
                 startActivity(intent);
                 finish();
             } else {
