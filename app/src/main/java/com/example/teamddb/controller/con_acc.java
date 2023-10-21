@@ -1,6 +1,10 @@
 package com.example.teamddb.controller;
 
+import android.content.ContentValues;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -14,24 +18,27 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.teamddb.Login;
+import com.example.teamddb.Place;
 import com.example.teamddb.database.Database;
 import com.example.teamddb.R;
 import com.example.teamddb.adap.adap_acc;
 import com.example.teamddb.model.acc;
 import com.example.teamddb.ultils.RecyclerTouchListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
-    public class con_acc extends AppCompatActivity {
+public class con_acc extends AppCompatActivity {
 
-        Database db;
-        List<acc> a;
-        RecyclerView recyclerview;
-        EditText ed;
-        adap_acc aa;
-    FloatingActionButton them;
+    Database db;
+    List<acc> a;
+    RecyclerView recyclerview;
+    EditText ed;
+    adap_acc aa;
+    FloatingActionButton them,thoat;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,8 +48,37 @@ import java.util.List;
         ed = findViewById(R.id.search);
         db = new Database(this);
         them = findViewById(R.id.them);
-        them.setOnClickListener(view -> showDialog(null,-1));
+        thoat = findViewById(R.id.thoat);
+
+        them.setOnClickListener(view -> showDialog(null, -1));
         getData();
+        navigate();
+        ed.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                aa = new adap_acc(con_acc.this, search(ed.getText().toString(),a));
+                recyclerview.setAdapter(aa);
+            }
+        });
+        thoat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(con_acc.this, Login.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
     }
 
 
@@ -71,6 +107,7 @@ import java.util.List;
         }));
         aa.notifyDataSetChanged();
     }
+
 
     private void showDialog(acc ac, int position) {
         LayoutInflater li = LayoutInflater.from(this);
@@ -133,13 +170,12 @@ import java.util.List;
             } else if (strHoTen.matches("")) {
                 editHoTen.requestFocus();
                 editHoTen.setError("Chưa nhập họ tên");
-            }
-            else if (checkTaiKhoanDuplicate(a, strTaiKhoan, ac)) {
+            } else if (checkTaiKhoanDuplicate(a, strTaiKhoan, ac)) {
                 editTaiKhoan.setError("Đã tồn tại tài khoản");
                 editTaiKhoan.requestFocus();
             } else if (ac == null) {
                 create(editTaiKhoan.getText().toString(), editMatKhau.getText().toString(),
-                    editEmail.getText().toString(), editHoTen.getText().toString());
+                        editEmail.getText().toString(), editHoTen.getText().toString());
                 alertDialog.dismiss();
             } else {
                 update(position, ac.getId(), editTaiKhoan.getText().toString(), editMatKhau.getText().toString(),
@@ -148,7 +184,7 @@ import java.util.List;
             }
         });
     }
-    
+
     private boolean checkTaiKhoanDuplicate(List<acc> a, String stracc, acc ac) {
         List<acc> taiKhoanListCheck = new ArrayList<>(a);
         if (ac != null) {
@@ -162,8 +198,8 @@ import java.util.List;
         return false;
     }
 
-    private void create(String accname, String pass,String email , String name) {
-        long id = db.create(accname, pass, email,name);
+    private void create(String accname, String pass, String email, String name) {
+        long id = db.create(accname, pass, email, name);
         acc ac = new acc();
         ac.setId(id);
         ac.setAccName(accname);
@@ -174,8 +210,10 @@ import java.util.List;
         aa.notifyDataSetChanged();
     }
 
-    private void update(int position, long id, String accname, String pass,String email , String name) {
-        db.update(id, accname, pass, email,name);
+
+
+    private void update(int position, long id, String accname, String pass, String email, String name) {
+        db.update(id, accname, pass, email, name);
         acc ac = new acc();
         ac.setId(id);
         ac.setAccName(accname);
@@ -191,4 +229,43 @@ import java.util.List;
         a.remove(position);
         aa.notifyItemRemoved(position);
     }
+    private List<acc> search(String strSearch, List<acc> a) {
+        strSearch = strSearch.toLowerCase();
+        if (strSearch.matches("")) {
+            return a;
+        } else {
+            List<acc> listResult = new ArrayList<>();
+            for (acc x : a) {
+                if (x.getName().toLowerCase().contains(strSearch) ||
+                        x.getPassword().toLowerCase().contains(strSearch) ||
+                        x.getEmail().toLowerCase().contains(strSearch) ||
+                        x.getAccName().toLowerCase().contains(strSearch)) {
+                    listResult.add(x);
+                }
+            }
+            return listResult;
+        }
+    }
+    private void navigate() {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom);
+        bottomNavigationView.setSelectedItemId(R.id.acc);
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.acc) {
+                return true;
+            } else if (itemId == R.id.buyticket) {
+                startActivity(new Intent(this, DanhSachChuyenXe.class));
+                overridePendingTransition(0, 0);
+                finish();
+                return true;
+            } else if (itemId == R.id.history) {
+                startActivity(new Intent(this, DanhSachChuyenXe.class));
+                overridePendingTransition(0, 0);
+                finish();
+                return true;
+            }
+            return false;
+        });
+    }
+
 }

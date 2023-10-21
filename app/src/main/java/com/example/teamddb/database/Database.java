@@ -29,9 +29,10 @@ public class Database extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String value = String.format("CREATE TABLE %s(%s INTEGER PRIMARY KEY, %s TEXT, %s TEXT, %s TEXT,%s TEXT",
-                TABLE_NAME, COLUMN_ID, COLUMN_ACCNAME, COLUMN_PASSWORD, COLUMN_EMAIL,COLUMN_NAME);
+        String value = String.format("CREATE TABLE %s(%s INTEGER PRIMARY KEY, %s TEXT, %s TEXT, %s TEXT, %s TEXT)",
+                TABLE_NAME, COLUMN_ID, COLUMN_ACCNAME, COLUMN_PASSWORD, COLUMN_EMAIL, COLUMN_NAME);
         db.execSQL(value);
+
     }
 
     @Override

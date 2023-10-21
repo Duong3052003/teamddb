@@ -1,4 +1,4 @@
-package com.example.teamddb;
+package com.example.teamddb.adap;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,6 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+
+import com.example.teamddb.Place;
+import com.example.teamddb.R;
 
 import java.util.ArrayList;
 

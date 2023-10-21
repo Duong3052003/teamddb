@@ -1,4 +1,4 @@
-package com.example.teamddb;
+package com.example.teamddb.controller;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -10,6 +10,13 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.teamddb.Place;
+import com.example.teamddb.R;
+import com.example.teamddb.adap.CustomAdapter;
+import com.example.teamddb.database.DatabaseHelper;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.ArrayList;
 public class DanhSachChuyenXe extends AppCompatActivity {
     private Button cartButton;
@@ -41,6 +48,8 @@ public class DanhSachChuyenXe extends AppCompatActivity {
         Place place4 = new Place(R.drawable.img_1, "ZooDoo", 130000, "Hai Phong", "Hue");
         dbHelper.addPlace(place4);
 
+        navigate();
+
         placeList = dbHelper.getdata_chuyenxe();
         placeAdapter = new CustomAdapter(this, placeList);
 
@@ -50,12 +59,9 @@ public class DanhSachChuyenXe extends AppCompatActivity {
 
         cartButton = findViewById(R.id.cartButton);
 
-        cartButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DanhSachChuyenXe.this, CartActivity.class);
-                startActivity(intent);
-            }
+        cartButton.setOnClickListener(view -> {
+            Intent intent = new Intent(DanhSachChuyenXe.this, CartActivity.class);
+            startActivity(intent);
         });
 
         // Khởi tạo các thành phần liên quan đến tìm kiếm
@@ -93,5 +99,25 @@ public class DanhSachChuyenXe extends AppCompatActivity {
         placeGridView.setAdapter(placeAdapter);
         placeAdapter.notifyDataSetChanged();
     }
-
+    private void navigate() {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom);
+        bottomNavigationView.setSelectedItemId(R.id.buyticket);
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.buyticket) {
+                return true;
+            } else if (itemId == R.id.acc) {
+                startActivity(new Intent(this, con_acc.class));
+                overridePendingTransition(0, 0);
+                finish();
+                return true;
+            } else if (itemId == R.id.history) {
+                startActivity(new Intent(this, DanhSachChuyenXe.class));
+                overridePendingTransition(0, 0);
+                finish();
+                return true;
+            }
+            return false;
+        });
+    }
 }

@@ -5,20 +5,6 @@
     android:background="#B66060"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/backToPlacesButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="0dp"
-        android:background="#AF9BA2"
-        android:paddingStart="16dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="16dp"
-        android:paddingBottom="8dp"
-        android:text="Trở về danh sách chuyến xe"
-        android:textColor="#493D3D" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,5 +24,19 @@
         android:divider="@android:color/darker_gray"
         android:dividerHeight="1dp"
         android:padding="16dp" />
+
+    <Button
+        android:id="@+id/backToPlacesButton"
+        android:layout_width="408dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="0dp"
+        android:background="#AF9BA2"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="8dp"
+        android:text="Trở về danh sách chuyến xe"
+        android:textColor="#493D3D" />
 
 </LinearLayout>

@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.teamddb.controller.con_acc;
 import com.example.teamddb.database.Database;
 
 public class Login extends AppCompatActivity {
@@ -42,8 +43,9 @@ public class Login extends AppCompatActivity {
             // Thực hiện kiểm tra thông tin đăng nhập
             if (isValidLogin(username, password)) {
                 // Đăng nhập thành công, chuyển đến hoạt động chính hoặc trang chính của ứng dụng
-                Intent intent = new Intent(Login.this, MainActivity.class);
+                Intent intent = new Intent(Login.this, con_acc.class);
                 startActivity(intent);
+                finish();
             } else {
                 // Đăng nhập thất bại, hiển thị thông báo lỗi
                 Toast.makeText(Login.this, "Tên người dùng hoặc mật khẩu không hợp lệ", Toast.LENGTH_SHORT).show();
@@ -54,6 +56,7 @@ public class Login extends AppCompatActivity {
             // Chuyển đến trang đăng ký khi người dùng nhấn nút "Đăng ký"
             Intent intent = new Intent(Login.this, Register.class);
             startActivity(intent);
+            finish();
         });
     }
 
@@ -61,7 +64,7 @@ public class Login extends AppCompatActivity {
         SQLiteOpenHelper dbHelper = new Database(this);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String[] columns = { "id" };
-        String selection = "username = ? AND password = ?";
+        String selection = "AccName = ? AND Password = ?";
         String[] selectionArgs = { username, password };
 
         Cursor cursor = db.query("tbTaiKhoan", columns, selection, selectionArgs, null, null, null);

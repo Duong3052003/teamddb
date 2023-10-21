@@ -1,4 +1,4 @@
-package com.example.teamddb;
+package com.example.teamddb.adap;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,6 +10,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.teamddb.CartItem;
+import com.example.teamddb.R;
+import com.example.teamddb.database.DatabaseHelper;
+
 import java.util.ArrayList;
 
 public class CartAdapter extends ArrayAdapter<CartItem> {
