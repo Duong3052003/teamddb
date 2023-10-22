@@ -12,8 +12,8 @@ import android.widget.TextView;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 
-import com.example.teamddb.Place;
 import com.example.teamddb.R;
+import com.example.teamddb.model.Place;
 
 import java.util.ArrayList;
 
@@ -106,6 +106,7 @@ public class CustomAdapter extends ArrayAdapter<Place> {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Lưu thông tin đặt hàng vào bảng giohang_diadiem
+                saveOrderToDatabase(place, quantity[0]);
                 saveOrderToDatabase(place, quantity[0]);
             }
         });

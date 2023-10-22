@@ -1,4 +1,4 @@
-package com.example.teamddb;
+package com.example.teamddb.model;
 
 public class Place {
     private int imageResource;
