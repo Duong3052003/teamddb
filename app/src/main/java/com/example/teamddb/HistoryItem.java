@@ -1,12 +1,12 @@
-package com.example.teamddb.model;
+package com.example.teamddb;
 
-public class CartItem {
+public class HistoryItem {
     private int id;
     private String name;
     private int price;
     private int quantity;
 
-    public CartItem(int id, String name, int price, int quantity) {
+    public HistoryItem(int id, String name, int price, int quantity) {
         this.id = id;
         this.name = name;
         this.price = price;

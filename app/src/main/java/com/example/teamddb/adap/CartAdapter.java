@@ -11,9 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.teamddb.CartItem;
 import com.example.teamddb.R;
 import com.example.teamddb.database.DatabaseHelper;
+import com.example.teamddb.model.CartItem;
 
 import java.util.ArrayList;
 
@@ -163,6 +163,7 @@ public class CartAdapter extends ArrayAdapter<CartItem> {
     private void performCheckout(int position, CartItem cartItem) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.delete("giohang_chuyenxe", "id=?", new String[] { String.valueOf(cartItem.getId()) });
+//        db.oncreate("history", "id=?", new String[] { String.valueOf(cartItem.getId()) });
         remove(getItem(position));
         notifyDataSetChanged();
         db.close();
